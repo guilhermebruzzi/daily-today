@@ -3,7 +3,7 @@ import Head from 'next/head'
 import useSwr from 'swr'
 
 import styles from '../styles/Home.module.css'
-import type { Answer } from './utils/answer'
+import type { Answer } from '../utils/answer'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
