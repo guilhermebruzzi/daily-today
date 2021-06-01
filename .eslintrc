@@ -1,0 +1,27 @@
+{
+  "extends": ["vtex"],
+  "ignorePatterns": [
+    "node_modules/",
+    "public/",
+    "dist/",
+    "types/",
+    "coverage/",
+    ".vscode/",
+    "__generated__/"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.tsx"],
+      "extends": ["vtex-react"]
+    }
+  ],
+  "rules": {
+    "import/dynamic-import-chunkname": [
+      "error",
+      {
+        "importFunctions": ["dynamicImport"]
+      }
+    ],
+    "react/react-in-jsx-scope": "off"
+  }
+}
