@@ -1,4 +1,4 @@
-import { differenceInCalendarDays, subDays, format } from 'date-fns'
+import { differenceInCalendarDays, format } from 'date-fns'
 
 export type Answer = 'YES' | 'NO' | 'NOTHING'
 
@@ -25,13 +25,9 @@ export function doWeHaveDailyToday(): Answer {
   return todayIsPlanningDay ? 'NO' : 'YES'
 }
 
-export function getZapierAnswer(_answer: Answer) {
+export function getZapierAnswer(answer: Answer) {
   const today = new Date()
-  const yesterday = subDays(today, 1)
   const formatPattern = 'yyyy-MM-dd'
 
-  return [
-    { id: format(yesterday, formatPattern) },
-    { id: format(today, formatPattern) },
-  ]
+  return [{ id: `${format(today, formatPattern)}--${answer}` }]
 }
