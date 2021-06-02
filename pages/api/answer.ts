@@ -1,7 +1,12 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { doWeHaveDailyToday } from '../../utils/answer'
+import { doWeHaveDailyToday, getZapierAnswer } from '../../utils/answer'
 
 export default (_req: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).json({ answer: doWeHaveDailyToday() })
+  const answer = doWeHaveDailyToday()
+
+  res.status(200).json({
+    answer,
+    zapierTrigger: getZapierAnswer(answer),
+  })
 }
