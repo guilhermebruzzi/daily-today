@@ -1,15 +1,39 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState, useCallback, useEffect } from 'react'
 import Head from 'next/head'
 import useSwr from 'swr'
 import DarkModeToggle from 'react-dark-mode-toggle'
+import * as ls from 'local-storage'
 
 import styles from '../styles/Home.module.css'
 import type { Answer } from '../utils/answer'
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json())
 
+const darkModeKey = 'darkMode'
+
+const useDarkModeState = (): [boolean | undefined, (v: boolean) => void] => {
+  const [isDarkMode, setIsDarkModeState] = useState<boolean | undefined>(
+    () => undefined
+  )
+
+  const setIsDarkMode = useCallback(
+    (newDarkMode: boolean) => {
+      setIsDarkModeState(newDarkMode)
+
+      ls.set<boolean>(darkModeKey, newDarkMode)
+    },
+    [setIsDarkModeState]
+  )
+
+  useEffect(() => {
+    setIsDarkModeState(ls.get<boolean>(darkModeKey) ?? true)
+  }, [setIsDarkModeState])
+
+  return [isDarkMode, setIsDarkMode]
+}
+
 export default function Home() {
-  const [isDarkMode, setIsDarkMode] = useState(() => true)
+  const [isDarkMode, setIsDarkMode] = useDarkModeState()
 
   const { data, error } = useSwr<{ answer: Answer }>('/api/answer', fetcher)
 
