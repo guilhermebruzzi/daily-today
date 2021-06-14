@@ -4,7 +4,7 @@ export type Answer = 'YES' | 'NO' | 'NOTHING'
 
 const referenceDates = [new Date('2021-05-31 10:00')]
 
-const RECURRENCE_IN_DAYS = 14
+const RECURRENCE_IN_DAYS = 21
 
 export function doWeHaveDailyToday(): Answer {
   const today = new Date()
