@@ -2,7 +2,7 @@ import { differenceInCalendarDays, format } from 'date-fns'
 
 export type Answer = 'YES' | 'NO' | 'NOTHING'
 
-const referenceDates = [new Date('2021-05-31 10:00')]
+const referenceDates = [new Date('2021-06-14 10:00')]
 
 const RECURRENCE_IN_DAYS = 21
 
