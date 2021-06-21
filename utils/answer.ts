@@ -2,11 +2,10 @@ import { differenceInCalendarDays, format } from 'date-fns'
 
 export type Answer = 'YES' | 'NO' | 'SKIP' | 'NOTHING'
 
-const referenceDates = [new Date('2021-06-14 10:00')]
-
-const RECURRENCE_IN_DAYS = 21
-
-export function doWeHaveDailyToday(): Answer {
+export function doWeHaveDailyToday(
+  referenceDates: Date[],
+  recurrenceInDays: number
+): Answer {
   const today = new Date()
 
   if (today.getDay() === 0 || today.getDay() === 6) {
@@ -14,7 +13,7 @@ export function doWeHaveDailyToday(): Answer {
   }
 
   const diffs = referenceDates.map((refDate) => {
-    return differenceInCalendarDays(new Date(), refDate) % RECURRENCE_IN_DAYS
+    return differenceInCalendarDays(new Date(), refDate) % recurrenceInDays
   })
 
   const todayIsPlanningDay = diffs.some((diff) => diff === 0)
