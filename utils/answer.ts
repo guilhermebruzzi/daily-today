@@ -1,6 +1,6 @@
 import { differenceInCalendarDays, format } from 'date-fns'
 
-export type Answer = 'YES' | 'NO' | 'NOTHING'
+export type Answer = 'YES' | 'NO' | 'SKIP' | 'NOTHING'
 
 const referenceDates = [new Date('2021-06-14 10:00')]
 
@@ -10,7 +10,7 @@ export function doWeHaveDailyToday(): Answer {
   const today = new Date()
 
   if (today.getDay() === 0 || today.getDay() === 6) {
-    return 'NO'
+    return 'SKIP'
   }
 
   const diffs = referenceDates.map((refDate) => {

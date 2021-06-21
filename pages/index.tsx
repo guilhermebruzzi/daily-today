@@ -74,10 +74,10 @@ export default function Home() {
           {answer === 'NOTHING' ? null : (
             <h2
               className={`${styles.description} ${
-                answer === 'NO' ? styles.descriptionNo : ''
+                answer === 'NO' || answer === 'SKIP' ? styles.descriptionNo : ''
               }`}
             >
-              {answer}
+              {answer === 'SKIP' ? 'NO (notification skipped)' : answer}
             </h2>
           )}
         </main>
