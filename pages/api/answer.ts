@@ -44,11 +44,15 @@ export default async (_req: NextApiRequest, res: NextApiResponse) => {
 
   const answer = doWeHaveDailyToday(referenceDates, recurrenceInDays)
 
+  const REF_DATES_FROM_REDIS = redis ? await redis.get('REF_DATES') : ''
+
   if (redis) {
     redis.quit()
   }
 
   res.status(200).json({
+    REDIS_URL,
+    REF_DATES_FROM_REDIS,
     answer,
     zapierTrigger: getZapierAnswer(answer),
   })
